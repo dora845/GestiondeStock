@@ -10,7 +10,7 @@ part 'user_state.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepositories _userRepositories;
   UserBloc(this._userRepositories) : super(UserLoadingState()) {
-    on<UserEvent>((event, emit) async {
+    on<LoadUserEvent>((event, emit) async {
       emit(UserLoadingState());
       try {
         final users = await _userRepositories.getUsers();
@@ -19,5 +19,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserErrorState(error: e.toString()));
       }
     });
+    on<CreateUserEvent>((event, emit) => emit(UserErrorState(error: event.creertest)));
   }
 }

@@ -9,3 +9,7 @@ abstract class UserEvent extends Equatable {
 
 class LoadUserEvent extends UserEvent {
 }
+class CreateUserEvent extends UserEvent {
+  final String creertest;
+  const CreateUserEvent({required this.creertest});
+}

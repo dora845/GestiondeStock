@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tourismo/service_locator.dart';
 
 import 'pages/home_page.dart';
 
 void main() {
+  setUpLocators();
   runApp(const MyApp());
 }
 
