@@ -19,6 +19,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserErrorState(error: e.toString()));
       }
     });
-    on<CreateUserEvent>((event, emit) => emit(UserErrorState(error: event.creertest)));
+    on<CreateUserEvent>(
+        (event, emit) => emit(UserErrorState(error: event.creertest)));
+    on<DeleteUserEvent>((event, emit)async {
+      emit(UserDeletedState(message: event.name));
+      await Future.delayed(const Duration(seconds: 1));
+      final users = await _userRepositories.getUsers();
+      emit(UserLoadedState(users: users));
+    });
   }
 }

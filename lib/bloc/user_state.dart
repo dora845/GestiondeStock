@@ -16,3 +16,7 @@ class UserErrorState extends UserState {
   final String error;
   const UserErrorState({required this.error});
 }
+class UserDeletedState extends UserState {
+  final String message;
+  const UserDeletedState({required this.message});
+}

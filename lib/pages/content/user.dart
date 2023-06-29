@@ -6,9 +6,14 @@ import 'package:tourismo/models/user_model.dart';
 import 'package:tourismo/repositories/user_repositories.dart';
 import 'package:tourismo/service_locator.dart';
 
-class User extends StatelessWidget {
+class User extends StatefulWidget {
   const User({super.key});
 
+  @override
+  State<User> createState() => _UserState();
+}
+
+class _UserState extends State<User> {
   @override
   Widget build(BuildContext context) {
     UserBloc userBloc = serviceLocator.get<UserBloc>();
@@ -20,15 +25,25 @@ class User extends StatelessWidget {
           return ListView.builder(
               itemCount: userList.length,
               itemBuilder: (_, int index) {
-                return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  child: Card(
-                    color: Theme.of(context).primaryColor,
-                    child: ListTile(
-                      title: Text('${userList[index].name}'),
-                      subtitle: Text('${userList[index].email}'),
-                      leading: CircleAvatar(child: Text('${userList[index].id}'),),
+                return Dismissible(
+                  key: Key(userList[index].id.toString()),
+                  onDismissed: (direction)async {
+                    userBloc.add(DeleteUserEvent(name:userList[index].name as String ));
+                    setState(() {
+                      userList.removeWhere((element) => element.id == userList[index].id);
+                    });
+                  },
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    child: Card(
+                      child: ListTile(
+                        dense: true,
+                        title: Text('${userList[index].name}'),
+                        subtitle: Text('${userList[index].email}'),
+                        leading: CircleAvatar(child: Text('${userList[index].id}'),),
+                        trailing: const Icon(Icons.list),
+                      ),
                     ),
                   ),
                 );

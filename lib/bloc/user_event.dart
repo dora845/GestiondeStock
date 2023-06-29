@@ -13,3 +13,7 @@ class CreateUserEvent extends UserEvent {
   final String creertest;
   const CreateUserEvent({required this.creertest});
 }
+class DeleteUserEvent extends UserEvent {
+  final String name;
+  const DeleteUserEvent({required this.name});
+}
