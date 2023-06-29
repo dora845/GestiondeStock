@@ -1,3 +1,4 @@
+import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:tourismo/bloc/user_bloc.dart';
 import 'package:tourismo/pages/content/user.dart';
@@ -24,12 +25,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: User(),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          userBloc
-              .add(CreateUserEvent(creertest: "test creer bloc et get it "));
-        },
-        child: Icon(Icons.add),
+      floatingActionButton: DraggableFab(
+        child: FloatingActionButton(
+          onPressed: () async {
+            userBloc
+                .add(CreateUserEvent(creertest: "test creer bloc et get it "));
+          },
+          child: Icon(Icons.add),
+        ),
       ),
     );
   }
