@@ -1,0 +1,5 @@
+3 gitpod environment
+brew tap leoafarias/fvm
+brew install fvm
+fvm install stable
+export PATH=$PATH:"/home/gitpod/fvm/versions/stable/bin"

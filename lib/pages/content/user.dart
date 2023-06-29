@@ -23,8 +23,13 @@ class User extends StatelessWidget {
                 return Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  child: ListTile(
-                    title: Text('${userList[index].name}'),
+                  child: Card(
+                    color: Theme.of(context).primaryColor,
+                    child: ListTile(
+                      title: Text('${userList[index].name}'),
+                      subtitle: Text('${userList[index].email}'),
+                      leading: CircleAvatar(child: Text('${userList[index].id}'),),
+                    ),
                   ),
                 );
               });
